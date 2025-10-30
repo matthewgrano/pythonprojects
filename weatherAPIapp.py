@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import (QApplication,
                              QVBoxLayout)
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
+import os
 
 class WeatherApp(QWidget):
     def __init__(self):
@@ -88,7 +89,7 @@ class WeatherApp(QWidget):
 
 
     def get_weather(self):
-        api_key = "190d2085678d54206495ac6f1c95c84d"
+        api_key = os.getenv(weather_api)
         city = self.city_input.text()
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
 
@@ -191,4 +192,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     weather_app = WeatherApp()
     weather_app.show()
+
     sys.exit(app.exec_())
